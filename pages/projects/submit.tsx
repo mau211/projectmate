@@ -9,6 +9,7 @@ import Router from 'next/router';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import Loader from '../../public/loading.json';
+import { createReactEditorJS } from 'react-editor-js'
 
 type FormInputs = {
   tags: string[];
@@ -30,6 +31,7 @@ const SubmitProject = () => {
   } = useForm<FormInputs>();
 
   const [tagInput, setTagInput] = useState<string>('');
+  const MarkdownEditor = createReactEditorJS()
   const removeTag = (index: number) => {
     setValue(
       'tags',
@@ -278,6 +280,16 @@ const SubmitProject = () => {
                 Note: We would advise you to upload a picture. otherwise, the
                 default github icon will appear.
               </span>
+            </motion.div>
+            <motion.div whileTap={{ scale: 0.9 }} className="space-y-2">
+              <label className="text-lg">Content</label>
+              <div 
+                className="w-full items-center rounded-md border border-gray-500 bg-transparent p-2 outline-none focus:border-2 focus:border-blue-600"
+
+              >
+                <MarkdownEditor defaultValue={{blocks: []}}/>
+              </div>
+              
             </motion.div>
           </form>
           <div className="my-4 w-full">
